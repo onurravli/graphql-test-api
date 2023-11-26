@@ -33,6 +33,7 @@ const typeDefs = gql`
     users: [User]
     userById(id: Int!): User
     userByUsername(username: String!): User
+    blockedUsers: [User]
   }
 `;
 
@@ -41,6 +42,7 @@ const resolvers = {
     users: () => users,
     userById: (_, { id }) => users.find((user) => user.id === id),
     userByUsername: (_, { username }) => users.find((user) => user.username === username),
+    blockedUsers: () => users.filter((user) => user.active == false),
   },
 };
 
